@@ -84,12 +84,23 @@ WSGI_APPLICATION = 'back_end.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    # }
+
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        # 连接本地mysql数据库
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'test',# 你的数据库名
+        # 'NAME': 'lifetime_love',# 你的数据库名
+        'USER': 'root',# 你的用户名
+        'PASSWORD': 'Wei909140058',#你的密码
+        'HOST': 'localhost',# 本地连接
+        'PORT': '3306',# 本地端口号
+
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -138,6 +149,12 @@ REST_FRAMEWORK = {
     #     # 'rest_framework.permissions.IsAuthenticated',
     #     'rest_framework.permissions.AllowAny',
     # ],
+
+    # 默认的响应渲染类
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer', # json渲染器，默认返回json数据
+        'rest_framework.renderers.BrowsableAPIRenderer',# 浏览器的API渲染器，返回调试界面
+    ],
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     )

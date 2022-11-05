@@ -10,8 +10,8 @@ class GetInfo(APIView):
 
     def get(self, request):
         try:
-            user_id = int(request.GET.get('user_id', 1))
-            me_id = request.user.id
+            user_id = int(request.GET.get('user_id', 1)) # 没有user_id 则用1代替
+            me_id = request.user.id # 来源于已登录用户
             player = Player.objects.get(user_id=user_id)
             return Response({
                 'id': player.user.id,
